@@ -1,0 +1,11 @@
+path: C:/Users/Lucas/Downloads/Machine Learning/MachineLearningTraining/datasets 
+train: caixas/train 
+val: caixas/train 
+test:
+
+names:
+    0: caixa pequena
+    1: caixa grande
+    2: caixa media
+    3: indetectavel
+    4: caixa errada
