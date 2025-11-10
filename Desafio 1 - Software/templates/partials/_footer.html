@@ -1,0 +1,20 @@
+{% block conteudo %}
+<link href="{{ url_for('static', filename='estilos/footer.css') }}" rel="stylesheet">
+<footer class="rodape">
+    <div class="rodape__icones">
+        <a href="https://facebook.com.br/" target="_blank">
+            <img src="{{ url_for('static', filename='imagens/icones/facebook.png') }}" alt="ícone twitter">
+        </a>
+        <a href="https://www.instagram.com.br/" target="_blank">
+            <img src="{{ url_for('static', filename='imagens/icones/instagram.png') }}" alt="ícone instagram">
+        </a>
+        <a href="https://github.com/" target="_blank">
+            <img src="{{ url_for('static', filename='imagens/icones/github.png') }}" alt="ícone instagram">
+        </a>
+        <a href="https://www.linkedin.com.br/" target="_blank">
+            <img src="{{ url_for('static', filename='imagens/icones/linkedin.png') }}" alt="ícone instagram">
+        </a>
+    </div>
+    <p class="rodape__texto">Desenvolvido por CODEXIS</p>
+</footer>
+{% endblock %}

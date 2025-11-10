@@ -1,0 +1,81 @@
+/* Reset geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Página inteira */
+html, body {
+    height: 100%;
+}
+
+.page-wrapper {
+    display: flex;
+    height: 100vh; /* ocupa toda a altura da tela */
+}
+
+/* Sidebar fixa lateral */
+.sidebar {
+    background-color: white;
+    border-radius: 20px 0 0 20px; /* borda arredondada só na lateral direita */
+    padding: 20px;
+    width: 250px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* ocupa toda altura */
+}
+
+/* Logo */
+.sidebar .logo {
+    color: #e6007e;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    width: 5em;
+    height: auto;
+}
+
+/* Links da sidebar */
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    padding: 12px 16px;
+    text-align: start;
+    transition: all 0.3s;
+}
+
+.sidebar-links a:hover {
+    color: #fff;
+    background-color: #e6007e;
+    transform: translateX(5px);
+}
+
+/* Chatbot */
+.chatbot {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+    /* Tamanho grande: 80% da largura e altura da tela */
+    width: 100vw;     /* 80% da largura da tela */
+    height: 80vh;    /* 80% da altura da tela */
+
+    /* Centralizar vertical e horizontal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    max-width: 1200px; /* limite máximo de largura */
+}

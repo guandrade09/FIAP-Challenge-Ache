@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{titulo}}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/dashboard.css') }}">
+</head>
+<body>
+  <!-- Sidebar fixa à esquerda -->
+  <div class="sidebar">
+    {% include "/partials/_navegacaoSideBar.html" %}
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="dashboard">
+    <div class="coluna-centro">
+      <section class="tarefas_concluidas secao">
+        <div class="header-com-botao">
+          <h1 class="titulo">Tarefas concluídas</h1>
+          <button class="btn-reset-filter" style="display:none;">All</button>
+        </div>
+        <div class="grafico-wrap">
+          <canvas id="grafico_rosca" aria-label="Gráfico de tarefas concluídas" role="img"></canvas>
+        </div>
+        <div class="legenda-compacta">
+          <span><i class="leg-icon leg-concluida"></i> Concluídas</span>
+          <span><i class="leg-icon leg-andamento"></i> Em Andamento</span>
+          <span><i class="leg-icon leg-nao"></i> Não iniciada</span>
+        </div>
+      </section>
+
+      <section class="proxima_tarefa secao">
+        <h1 class="titulo">Próxima tarefa</h1>
+        <div class="card" id="card">
+          <p class="placeholder">Carregando...</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="progresso_fase secao secao-fases">
+      <h1 class="titulo">Fases</h1>
+      <div class="fases-list">
+        {% for fase in fases %}
+        <div class="fase-container" data-fase="{{ fase }}">
+          <div class="fase-header">
+            <span class="fase-nome">{{ fase }}</span>
+            <button class="focar btn-next-task" aria-label="Focar fase {{ fase }}">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+
+          <div class="barra-wrapper" aria-hidden="true">
+            <div class="barra_fundo" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="barra-preenchida"></div>
+              <span class="progress-label">0%</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+
+  <div id="barra-tooltip" class="barra-tooltip" style="display:none;"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{% block conteudo %}
+<link href="{{ url_for('static', filename='estilos/uploadsArquivos.css') }}" rel="stylesheet">
+
+<div class="upload">
+    <h2>Upload de Excel ou CSV</h2>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div id="dropzone" class="dropzone">
+            Solte o arquivo aqui ou clique para selecionar
+        </div>
+
+        <input type="file" id="fileInput" name="arquivo" accept=".csv, .xlsx" style="display: none;" required>
+    </form>
+
+    <div id="uploadStatus"></div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/lista.js') }}"></script>
+<script src="{{ url_for('static', filename='js/uploadsArquivos_script.js') }}"></script>
+
+{% endblock %}

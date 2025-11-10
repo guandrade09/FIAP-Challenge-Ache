@@ -1,0 +1,411 @@
+/* Reset e Base */
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+  background: #f6f7f8;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: auto;
+}
+
+/* Layout principal */
+
+.main-content-kpi {
+  background-color: #fff;
+  border-top: 220px;
+  border-color: #f9fafb;
+  border-radius: 15px;
+  padding: 0 10px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  height: 70vh; /* altura fixa */
+  overflow-y: auto; /* scroll vertical se necessário */
+}
+
+.dashboard {
+  display: flex;
+  gap: 12px;
+  padding: 24px;
+  height: auto;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+/* Coluna Esquerda */
+
+.coluna-esquerda {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+  overflow-y: auto;
+  height: auto;
+}
+
+/* Coluna direita */
+
+.coluna_direita {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  height: auto;
+}
+
+/* Cards */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* distribui os itens verticalmente */
+  background: #f8f8f8;
+  border-radius: 14px;
+  padding: 12px;
+  height: auto;
+  min-height: 0;
+  box-shadow: 0 6px 10px rgba(16,24,40,0.04);
+  overflow-y: auto;
+  animation: fadeInUp .28s ease both;
+}
+
+#card-bottom {
+  height: 100%;
+}
+
+.titulo { 
+  font-size: 28px; 
+  font-weight: 700; 
+  color: #252525;
+  margin-bottom: 4px;
+}
+
+/* Gráfico rosca */
+
+.grafico-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+  max-height: 280px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+#grafico_rosca {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 24px
+}
+
+/* legenda compacta */
+
+.legenda-compacta {
+  display:flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 12px;
+  color: #6b7280;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.leg-icon { 
+  display:inline-block; 
+  width:18px; 
+  height:10px; 
+  border-radius:4px; 
+  margin-right:8px; 
+  vertical-align:middle; 
+}
+
+.leg-concluida { 
+  background: #E6007E; 
+}
+
+.leg-andamento { 
+  background: #F380BF; 
+}
+
+.leg-nao { 
+  background: #cbd5e1; 
+}
+
+/* Próxima tarefa (card) */
+
+.proxima_tarefa { 
+  display:flex; 
+  flex-direction:column; 
+  gap:12px; 
+  flex: 0 0 auto; 
+}
+
+#card-cinza {
+  background: #d0d0d0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  color: #111827;
+  min-height: 120px;
+  transition: transform .18s ease, box-shadow .18s ease;
+  height: 100%;
+}
+
+#card-cinza p { 
+  line-height: 1.5; 
+  color: #222; 
+}
+
+#card-cinza .meta {
+  font-weight:700;
+  color:#111827; 
+  margin-right:6px; 
+}
+
+/* ícones pequenos no card-cinza */
+.card-cinza-meta-row { 
+  display:flex; 
+  gap:12px; 
+  align-items:center; 
+  color:#374151; 
+  margin-bottom:8px; 
+}
+.card-cinza-meta-row i { 
+  color:#6B7280; 
+  margin-right:6px; 
+}
+
+/* Lista de fases */
+
+.fases-list { 
+  display:flex; 
+  flex-direction:column; 
+  gap:16px;
+}
+
+.fase-container {
+  background: linear-gradient(180deg,#fff,#fff);
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: 0 4px 18px rgba(16,24,40,0.04);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.fase-header { 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  gap:2px; 
+}
+
+.fase-nome {
+  font-size: 12px;
+  font-weight:600; 
+  color:#111827; 
+}
+
+/* wrapper da barra para garantir padding/posicionamento */
+
+.barra-wrapper { 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+}
+
+/* Botão para o Previsão de Entrega */
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-btn {
+    background: #E6007E;
+    color: #000;
+    padding: 0 8px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background: #f380bf;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.nav-btn-active {
+    background: #E6007E;
+    color: #fff;
+    padding: 0 8px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nav-btn-active:hover {
+    background: #d30978;
+    transform: scale(1.05);
+}
+
+.tipo-previsao {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 10px 0 20px 0;
+  color: #444;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+
+/* Barra de progresso */
+
+.barra_fundo {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background: #eef2f6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.barra-preenchida {
+  position: absolute;
+  left:0; top:0;
+  height:100%;
+  width:0;
+  background: linear-gradient(90deg,#34d399,#10b981);
+  border-radius: 10px;
+  transition: width 900ms cubic-bezier(.2,.8,.2,1);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.04);
+}
+
+/* Label lateral de % */
+
+.progress-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+/* Tooltip custom */
+
+.barra-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(15,23,42,0.95);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.35);
+  z-index: 9999;
+  transform: translate(-50%, -140%);
+  white-space: nowrap;
+}
+
+/* Previsão (superior) */
+
+.previsao-cima {
+    display: flex;
+    justify-content: center; /* centraliza lado a lado */
+    gap: 15px; /* espaço entre os spans */
+    margin-bottom: 20px;
+}
+
+.previsao-dias, .previsao-data {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Previsão (inferior) */
+.previsao-baixo {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.duracao-header {
+    display: flex;
+    flex-direction: column; /* empilha verticalmente */
+    align-items: center;
+    margin: 5px;
+}
+
+.duracao-nome {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.duracao-quantidade {
+    font-size: 14px;
+    color: #333;
+    margin-top: 4px; /* espaçamento entre nome e quantidade */
+}
+
+
+/* Microinterações */
+
+.fase-container:hover { 
+  transform: translateY(-3px); 
+  transition: transform .16s ease; 
+}
+
+/* Animação suave de entrada */
+
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(6px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* Responsividade */
+
+@media (max-width: 1100px) {
+  .dashboard { padding: 16px; gap: 16px; }
+  #grafico_rosca { max-height: 220px; }
+}
+
+@media (max-width: 880px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+
+  .dashboard {
+    margin-left: 0;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  #grafico_rosca { max-height: 200px; max-width: 200px; }
+}

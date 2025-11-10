@@ -1,0 +1,92 @@
+{% block conteudo %}
+<link href="{{ url_for('static', filename='estilos/listaArquivos.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="bottom">
+    <!-- Header fixo -->
+    <div class="header-container">
+        <h2>Arquivos Recentes</h2>
+        <div class="btns-container">
+            <button id="btn-todos" class="btn-todos" onclick="selecionarTodos()">
+                <i class="fa-solid fa-folder"></i>Selecionar todos
+            </button>
+            <button id="btn-remover-marcacoes" class="btn-remover-marcacoes" onclick="desvincularMarcacoes()">
+                <i class="fa-solid fa-xmark"></i>Remover marcações
+            </button>
+            <button id="btn-gerar-excel" class="btn-gerar-excel" type="button">
+                <i class="fa-solid fa-file-excel"></i> Gerar Excel
+            </button>
+            <button id="btn-import-pdf" class="btn-import-pdf" type="button">
+                <i class="fa-solid fa-file-word"></i> Importar PDF
+            </button>
+            <input type="file" id="pdf-input" accept="application/pdf" style="display:none;">
+        </div>
+    </div>
+
+    <!-- Áreas com abas expansíveis -->
+    <div class="arquivos-container">
+
+        <!-- Aba Projetos -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Projetos</span>
+                <i class="fa-solid fa-chevron-down seta"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="lista-arquivos-scroll">
+                    <ul class="lista-arquivos">
+                        {% for projeto in projetos %}
+                        <li class="item-arquivo" data-caminho="{{ projeto.caminho }}" id="projeto-item">
+                            <div class="info-arquivo">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox-arquivo" data-nome="{{ projeto.nome }}">
+                                </div>
+                                <i class="fas fa-file-excel"></i>
+                                <span class="nome-arquivo">{{ projeto.nome }}</span>
+                            </div>
+                            <a class="btn-baixar" href="{{ url_for('download_arquivo', filename=projeto.caminho) }}" download>Baixar</a>
+                            <a class="btn-deletar-arquivo" data-caminho="{{ projeto.caminho }}" href="#">Deletar</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aba PDFs -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Documentos PDF</span>
+                <i class="fa-solid fa-chevron-down seta"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="lista-arquivos-scroll">
+                    <ul class="lista-arquivos">
+                        {% for pdf in pdfs %}
+                        <li class="item-arquivo" data-caminho="{{ pdf.caminho }}">
+                            <div class="info-arquivo">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="checkbox-arquivo" data-nome="{{ pdf.nome }}">
+                                </div>
+                                <i class="fas fa-file-pdf"></i>
+                                <span class="nome-arquivo">{{ pdf.nome }}</span>
+                            </div>
+                            <a class="btn-baixar" href="{{ url_for('download_arquivo', filename=pdf.caminho) }}" download>Baixar</a>
+                            <a class="btn-deletar-arquivo" data-caminho="{{ pdf.caminho }}" href="#">Deletar</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/lista.js') }}"></script>
+<script src="{{ url_for('static', filename='js/listaArquivos_script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/excluir.js') }}"></script>
+<script src="{{ url_for('static', filename='js/importPDF.js') }}"></script>
+{% endblock %}

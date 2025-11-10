@@ -1,0 +1,219 @@
+.chatbot {
+    background-color: #F8F9FA;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 65vh;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 370px;
+    max-height: 100vh;
+}
+
+.chatbot h2 {
+    color: #495057;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+.chatbot p {
+    color: #868e96;
+    font-size: 16px;
+    margin: 0 0 10px 0;
+}
+
+
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: #E9ECEF;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 75vh;
+    flex-grow: 1;
+    scroll-behavior: smooth;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    animation: fadeIn 0.5s forwards;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1em;
+
+    /* 🚨 CORREÇÃO ESSENCIAL AQUI 🚨 */
+    /* Isso força o navegador a respeitar os caracteres \n (nova linha) */
+    white-space: pre-wrap;
+}
+
+.message.user {
+    background-color: #a316b8;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    margin-left: auto;
+}
+
+.message.bot {
+    background-color: #e6007e;
+    color: #ffffff;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+    margin-right: auto;
+}
+
+.message.typing {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    background-color: #e6007e;
+    color: #ffffff;
+    align-self: flex-start;
+    max-width: 70%;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.message.typing span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #fdfdfd;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+}
+
+.message.typing span:nth-child(2) { animation-delay: 0.2s; }
+.message.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+.textbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.textbox input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid #dee2e6;
+    background-color: #F1F3F5;
+    color: #000000;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.textbox input:focus {
+    border-color: #9c0376;
+    box-shadow: 0 0 0 3px rgba(156, 3, 118, 0.2);
+}
+
+.textbox button {
+    padding: 12px 20px;
+    background-color: #e6007e;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.textbox button:hover {
+    background-color: #7a025d;
+    transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .chatbot {
+        padding: 15px;
+        max-width: 100%;
+        margin: 10px;
+        height: auto;
+    }
+
+    .chat-box {
+        max-height: 40vh;
+    }
+}
+
+.logo__chatbot {
+    width: 3em;
+    height: auto;
+    margin-right: 2px;
+}
+
+/* Garante que o texto dentro das mensagens do bot fique branco */
+.message.bot .bot-text {
+    color: #ffffff !important;
+    font-size: 14px;
+}
+
+.message.user {
+    color: #ffffff !important;
+}
+
+/* ---- ESTILIZAÇÃO DO TEXTO DO BOT ---- */
+.bot-text {
+    white-space: pre-wrap;      /* mantém quebras de linha */
+    font-size: 13px;
+    line-height: 1.5;
+    color: #ffffff;             /* mantém texto branco dentro da mensagem .bot */
+}
+
+/* ---- BOTÃO DE DOWNLOAD DENTRO DA RESPOSTA DO BOT ---- */
+.bot-download-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background-color: #ffffff;     /* contraste com o balão rosa */
+    color: #e6007e !important;     /* mantém identidade visual */
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    transition: all 0.25s ease;
+}
+
+.bot-download-button:hover {
+    background-color: #ffe6f2;
+    transform: translateY(-1px);
+}
+
+/* Ajusta para o botão alinhar direitinho dentro do balão do bot */
+.message.bot .bot-download-button {
+    display: block;
+    width: max-content;
+}
+
+.marcanossa{
+    font-size: auto;
+    color: cornflowerblue;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }}</title>
+    <!-- <link rel="icon" type="image/png" href="../../static/imagens/icones/acheIcon.png"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% include "/partials/_navegacaoSideBar.html" %}
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <section class="arquivos">
+                {% include "/partials/_uploadsArquivos.html" %}
+                {% include "/partials/_listaArquivos.html" %}
+            </section>
+
+            <section class="chatbot">
+                {% include "/partials/_chatbot.html" %}
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+     {% include "/partials/_footer.html" %}
+
+</body>
+</html>

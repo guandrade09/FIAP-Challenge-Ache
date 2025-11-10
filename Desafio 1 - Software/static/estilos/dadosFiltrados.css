@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    
+}
+
+.main-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+    padding: 0 15px;
+    zoom: 0.9;
+}
+
+.filters {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.filters input, .filters select {
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+.conclusao-wrapper {
+    display: flex;
+    position: relative;
+    width: 300px;
+    align-items: center;
+}
+
+.conc-container {
+    position: relative;
+    width: 300px;
+    height: 30px;
+}
+
+.filtro-conclusao-container {
+    display: flex;
+}
+
+#toggle-conclusao-filtro {
+    background: #E6007E;
+    color: #fff;
+    padding: 0 8px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    margin: 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#toggle-conclusao-filtro:hover {
+    background: #f380bf;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    outline: none;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.slider-track {
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 5px;
+}
+
+input[type="range"]::-moz-range-track {
+    -moz-appearance: none;
+    height: 5px;
+}
+
+input[type="range"]::-ms-track {
+    appearance: none;
+    height: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 1.7em;
+    width: 1.7em;
+    background-color: #e6007e;
+    cursor: pointer;
+    margin-top: -9px;
+    pointer-events: auto;
+    border-radius: 50%;
+}
+
+.slider-1::-webkit-slider-thumb {
+    margin-left: -12px;
+}
+
+.slider-2::-webkit-slider-thumb {
+    margin-left: 12px;
+}
+
+input[type="range"]::-ms-thumb {
+    appearance: none;
+    height: 1.7em;
+    width: 1.7em;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #e6007e;
+    pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    background-color: #F4C0D9;
+    border: 3px solid #e6007e;
+}
+
+.conc-values {
+    display: flex;
+    gap: 4px;
+    background-color: #e6007e;
+    margin: 0 10px;
+    padding: 2px 6px;
+    width: auto;
+    position: relative;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.main-content {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    height: 70vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.tabela-tarefas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-tarefas th, .tabela-tarefas td {
+    padding: 10px;
+    text-align: left;
+    font-size: 13px;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #f9fafb;
+    border-radius: 15px;
+}
+
+.tabela-tarefas th {
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.lista-dados:hover {
+    background-color: #f0f4ff;
+}
+
+.table-progress-container {
+    background-color: #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+    min-width: 80px;
+    position: relative;
+}
+
+.table-progress-bar {
+    background-color: #48bb78;
+    color: white;
+    height: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: width 0.4s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #4b5563;
+    z-index: 1;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    
+    margin-top: 15px;
+    width: 100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.progress {
+    background-color: #16a34a;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-box, .condicao-box, .btn-export {
+    padding: 1em;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.btn {
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.export {
+    background-color: #e6007e;
+    color: #fff;
+    font-weight: bold;
+}
+
+.condicao-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.condicao-box .label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn.cond {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn.cond.ativo {
+    background-color: #e6007e;
+    color: #fff;
+}
+
+.progress-zero-text {
+    background-color: #f147569d;
+    height: 100%;
+    text-align: center;
+    color: #4b5563;
+    font-size: 12px;
+    font-weight: bold;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-bar {
+    background-color: #e5e7eb;
+    border-radius: 12px;
+    height: 24px;
+    width: 100%;
+    max-width: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px;
+}
+
+.progress-box .label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.progress-text-media {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #4b5563;
+    z-index: 1;
+}

@@ -1,0 +1,268 @@
+{% block conteudo %}
+<link href="{{ url_for('static', filename='estilos/dadosFiltrados.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='estilos/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='estilos/gantt.css') }}" rel="stylesheet">
+
+<main class="main-container">
+    <!-- Filtros -->
+    <div class="filters">
+        <!-- Filtro: Lista de Projetos (SELECT) -->
+        <select id="filtro-projeto">
+            <option value="__all__">Todos os Projetos</option>
+            {% for projeto in projetos %}
+                {% if projeto.endswith('.xlsx') %}
+                    <option value="{{ projeto }}">{{ projeto.replace('.xlsx', '').replace('_', ' ') }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <!-- Filtro: Nome da Tarefa (TEXT INPUT) -->
+        <input type="text" id="filtro-nome" placeholder="Filtrar por Nome">
+        <select id="filtro-classificacao">
+            <option value="">Todos as Classificações</option>
+            {% for classificacao in classificacoes %}
+                <option value="{{ classificacao }}">{{ classificacao }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Filtro: Categoria (SELECT) -->
+        <select id="filtro-categoria">
+            <option value="">Todos as Categorias</option>
+            {% for categoria in categorias %}
+                <option value="{{ categoria }}">{{ categoria }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Filtro: Fase (SELECT) -->
+        <select id="filtro-fase">
+            <option value="">Todas as Fases</option>
+            {% for fase in fases %}
+                <option value="{{ fase }}">{{ fase }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Filtro: Duracao (SELECT) -->
+        <select id="filtro-duracao">
+            <option value="">Todas as Durações</option>
+            {% for duracao in duracoes %}
+                <option value="{{ duracao }}">{{ duracao }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Filtro: Conclusão -->
+        <div class="filtro-conclusao-container">
+    
+            <input type="text" id="filtro-conclusao-text" placeholder="Filtrar por %">
+
+            <div class="conclusao-wrapper" id="filtro-conclusao-slider" style="display: none;">
+                <div class="conc-container">
+                    <div class="slider-track"></div> 
+                    <input class="slider-1" type="range" min="0" max="100" value="0" id="slider-1" oninput="slideOne()"> 
+                    <input class="slider-2" type="range" min="0" max="100" value="100" id="slider-2" oninput="slideTwo()"> 
+                </div>
+                <div class="conc-values"> 
+                    <span id="range1"> 0 </span> 
+                    <span> &dash; </span> 
+                    <span id="range2"> 100 </span> 
+                </div>
+            </div> 
+
+            <button id="toggle-conclusao-filtro" type="button" title="Alternar Filtro de Conclusão">
+                <span id="toggle-text">Slider</span> 
+            </button>
+        </div>    
+    </div>
+
+    
+    <div class="main-screen">
+        <!-- Abas -->
+        <div class="tabs">
+            <button class="tab-button active" data-tab="dados">🧮 Dados</button>
+            <button class="tab-button" data-tab="kpi">📈 KPI</button>
+            <button class="tab-button" data-tab="gantt">📊 Gantt</button>
+        </div>
+
+        <!-- Aba: Dados (normalmente ativa) -->
+        <div class="tab-content active" id="dados">
+            <div class="main-content">
+                <table class="tabela-tarefas">
+                    <thead class ="cabecalho">
+                        <tr>
+                            <th>Número</th>
+                            <th>Classificação</th>
+                            <th>Categoria</th>
+                            <th>Fase</th>
+                            <th>Condição</th>
+                            <th>Nome</th>
+                            <th>Duração</th>
+                            <th>Como Fazer</th>
+                            <th>Doc. Referência</th>
+                            <th>% Concluída</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tarefa in tarefas %}
+                        <tr class="lista-dados" data-projeto="{{ tarefa.nomeArquivo }}">
+                            <td>{{ tarefa.numero }}</td>
+                            <td>{{ tarefa.classificacao }}</td>
+                            <td>{{ tarefa.categoria }}</td>
+                            <td>{{ tarefa.fase }}</td>
+                            <td>{{ tarefa.condicao }}</td>
+                            <td title="{{ tarefa.nome }}">{{ tarefa.nome }}</td>
+                            <td>{{ tarefa.duracao }}</td>
+                            <td>{{ tarefa.comoFazer }}</td>
+                            <td>{{ tarefa.docReferencia }}</td>
+                            <td>
+                                <div class="table-progress-container">
+                                {% if tarefa.porcentagemConcluida == 0 %}
+                                    <div class="progress-zero-text">0%</div>
+                                {% else %}
+                                    <div class="table-progress-bar" style="width: {{ tarefa.porcentagemConcluida }}%;"></div>
+                                    <span class="progress-text">{{ tarefa.porcentagemConcluida }}%</span>
+                                {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr id="no-results-row" style="display:none">
+                            <td colspan="10" style="text-align:center; padding: 20px;">Nenhum resultado encontrado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Aba: KPI -->
+        <div class="tab-content" id="kpi">
+            <div class="main-content-kpi">
+                <div class="dashboard">
+                    <section class="coluna-esquerda">
+                        <!-- Card: Tarefas Concluídas -->
+                        <div class="card">
+                            <section class="tarefas_concluidas">
+                                <h1 class="titulo">Tarefas concluídas</h1>
+                                <div class="grafico-wrap">
+                                    <canvas id="grafico_rosca" aria-label="Gráfico de tarefas concluídas" role="img"></canvas>
+                                </div>
+                                <div class="legenda-compacta">
+                                    <span><i class="leg-icon leg-concluida"></i> Concluídas</span>
+                                    <span><i class="leg-icon leg-andamento"></i> Em Andamento</span>
+                                    <span><i class="leg-icon leg-nao"></i> Não iniciada</span>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Card: Próxima Tarefa -->
+                        <div class="card">
+                            <div class="proxima_tarefa">
+                                <h1 class="titulo">Próxima tarefa</h1>
+                                <div class="card-cinza" id="card-cinza">
+                                    <p class="placeholder">Carregando...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    
+                    <section class="coluna_direita">
+                        <!-- Card: Fases -->
+                        <div class="card" id="card-fases">
+                            <h1 class="titulo">Fases</h1>
+                            <div class="fases-list">
+                                {% for fase in fases %}
+                                <div class="fase-container" data-fase="{{ fase }}">
+                                    <div class="fase-header">
+                                        <span class="fase-nome">{{ fase }}</span>
+                                    </div>
+
+                                    <div class="barra-wrapper" aria-hidden="true">
+                                        <div class="barra_fundo" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                            <div class="barra-preenchida"></div>
+                                            <span class="progress-label">0%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <!-- Card: Previsão de Entrega -->
+                        <div class="card" id="card-previsao">
+                            <div class="card-header">
+                                <button id="arrow-btn-left" class="nav-btn">⬅</button>
+                                <h1 class="titulo" id="tipo-previsao">Previsão</h1>
+                                <button id="arrow-btn-right" class="nav-btn">➡</button>
+                            </div>
+                            <div class="previsao-cima">
+                                <span class="previsao-dias">N/A</span>
+                                <p> | </p>
+                                <span class="previsao-data">N/A</span>
+                            </div>
+
+                            <div class="previsao-baixo">
+                                <canvas id="graficoDuracoes" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div id="barra-tooltip" class="barra-tooltip" style="display:none;"></div>
+            </div>
+        </div>  
+        
+        <div class="tab-content" id="gantt">
+            <div class="main-content-gantt" id="ganttContainer">
+                <h1 class="titulo"> Gráfico Gantt </h1>
+                <p class="modo" id="gantt-mode-display"> Modo Geral </p>
+
+                <div style="width: 100%; margin: auto;">
+                    <canvas id="ganttChart"></canvas>
+                </div>
+
+                <div class="button-container">
+                    <button class="mode-button" id="btn-mode">Alterar Modo</button>
+                    <button id="fullscreen-btn" class="fullscreen-button">⛶</button>  
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="https://cdn.tailwindcss.com"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações embaixo -->
+    <div class="actions">
+        <div class="btn-export">
+            <button id="btn-exportar" class="btn export" type="button">
+                <i class="fa-solid fa-file-arrow-down"></i> Exportar
+            </button>
+        </div>
+        <div class="condicao-box">
+            <span class="label">Condição:</span>
+            <button class="btn cond" data-condicao="A">A</button>
+            <button class="btn cond" data-condicao="B">B</button>
+            <button class="btn cond" data-condicao="C">C</button>
+            <button class="btn cond" data-condicao="Sempre">Sempre</button>
+            <button class="btn cond ativo" data-condicao="Todos">Todos</button>
+        </div>
+        
+        <div class="progress-box">
+            <span class="label">Conclusão</span>
+            <div class="progress-bar">
+                <div class="progress"></div>
+                <span class="progress-text-media"></span>
+            </div>
+        </div>
+    </div>
+
+</main>
+<script src="{{ url_for('static', filename='js/dadosFiltrados.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/gantt.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+{% endblock %}

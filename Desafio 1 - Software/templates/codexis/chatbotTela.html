@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }}</title>
+    <link rel="icon" type="image/png" href="../../static/imagens/icones/acheIcon.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/chatbotTela.css') }}">
+</head>
+<body>
+    <div class="page-wrapper">
+
+        {% include "/partials/_navegacaoSideBar.html" %}
+
+        <!-- Seção principal: Chatbot -->
+        <section class="chatbot">
+            {% include "/partials/_chatbot.html" %}
+        </section>
+
+    </div>
+</body>
+</html>

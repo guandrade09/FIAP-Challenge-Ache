@@ -1,0 +1,147 @@
+/* ===========================
+   RESET E FONTES
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===========================
+   ESTRUTURA GERAL
+=========================== */
+body {
+    background: #f6f7f8;
+    
+    
+}
+
+
+
+.page-wrapper {
+   display: flex;
+    gap: 20px;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+/* Limita a largura máxima e centraliza o conteúdo */
+.page-wrapper > * {
+    max-width: 100%;
+}
+
+/* ===========================
+   TABS
+=========================== */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-left: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.tab-button:hover {
+    background: #ccc;
+}
+
+.tab-button.active {
+    background: #e6007e;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ===========================
+   CHATBOT
+=========================== */
+.chatbot {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+
+    /* largura */
+    width: 2%;
+    max-width: 400px;
+    margin: 0 auto;
+
+    /* altura */
+    min-height: 35em;      /* altura mínima decente */
+    max-height: 30vh;       /* não ultrapassa 80% da tela */
+           /* cresce se houver espaço disponível */
+    
+    overflow-y: auto;       /* scroll interno se passar do limite */
+}
+
+
+
+
+
+/* Telas até 1600px (ex: notebooks grandes e ultrawides) */
+@media (max-width: 1600px) {
+    .chatbot {
+        max-width: 1200px;
+    }
+
+    .tabs {
+        margin-left: 20px;
+    }
+}
+
+/* Telas até 1366px (ex: notebooks padrão) */
+@media (max-width: 1366px) {
+    body {
+        zoom: 0.9;
+    }
+
+    .chatbot {
+        padding: 18px;
+        max-width: 1000px;
+    }
+
+    .tab-button {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+}
+
+/* Telas até 1024px (ex: notebooks menores) */
+@media (max-width: 1024px) {
+    body {
+        zoom: 0.85;
+    }
+
+    .page-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .chatbot {
+        width: 95%;
+    }
+
+    .tabs {
+        justify-content: center;
+        margin-left: 0;
+    }
+}

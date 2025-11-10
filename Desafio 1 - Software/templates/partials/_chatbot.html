@@ -1,0 +1,23 @@
+{% block conteudo %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='estilos/chatbot.css') }}">
+
+<h2>
+    <img class="logo__chatbot" src="../../static/imagens/icones/codexisGPT.png">
+</h2>
+<p>Olá, bem-vindo(a)!</p>
+
+<div class="chat-box">
+    <div id="chat" class="chat">
+        <!-- Mensagens do bot e do usuário serão inseridas aqui -->
+    </div>
+</div>
+
+<div class="textbox">
+    <input name="pergunta" id="inputMsg" placeholder="Digite aqui..."/>
+    <button id="enviar" onclick="enviarMensagem()">Enviar</button>
+</div>
+
+<script src="{{ url_for('static', filename='js/chatbot_script.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+.alert.alert-success {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: rgb(128, 4, 133);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 9999;
+    background-color: #e91e63; /* rosa pink */
+
+    white-space: nowrap;
+    animation: fade-in 0.4s ease;
+}

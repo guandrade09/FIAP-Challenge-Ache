@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/dados.css') }}">
+    <link rel="icon" type="image/png" href="../../static/imagens/icones/acheIcon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>{{titulo}}</title>
+</head>
+<body>
+    <div class="page-wrapper">
+
+        {% include "/partials/_navegacaoSideBar.html" %}
+
+        <!-- Tab ativa -->
+        {% include "/partials/_dadosFiltrados.html" %}
+
+        <!-- Tab de KPI -->
+        <section class="chatbot">
+            {% include "/partials/_chatbot_pgDados.html" %}
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+</body>
+</html>

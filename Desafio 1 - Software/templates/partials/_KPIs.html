@@ -1,0 +1,53 @@
+{% block conteudo %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='estilos/dashboard.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <body>
+        <!-- Tabs -->
+        <div class="tab-content" id="kpi">
+            <button class="tab-button active" data-tab="dados">📊 Dados</button>
+            <button class="tab-button" data-tab="kpi">📈 KPI</button>
+            <div class="grid">
+                <section class="tarefas_concluidas">
+                    <div class="secao">
+                        <div class="header-com-botao">
+                            <h1 class="titulo">Tarefas concluídas</h1>
+                            <button class="btn-reset-filter" style="display: none;">Reset</button>
+                        </div>
+                        <canvas class="grafico_rosca" id="grafico_rosca"></canvas>
+                    </div>
+                </section>
+
+                <section class="proxima_tarefa">
+                    <div class="secao">
+                        <h1 class="titulo">Próxima tarefa</h1>
+                        <div class="card" id="card"></div>
+                    </div>
+                </section>
+
+                <section class="progresso_fase">
+                <div class="secao secao-fases">
+                    <h1 class="titulo">Fases</h1>
+                    {% for fase in fases %}
+                    <div class="fase-container" data-fase="{{ fase }}">
+                    <p class="fase_atual">{{ fase }}
+                        <button class="focar btn-next-task">
+                            <i class="fa-solid fa-magnifying-glass">
+                            </i>
+                        </button>
+                    </p>
+    
+                    <div class="barra_fundo">
+                        <div class="barra-preenchida"></div>
+                        <span class="progress-label">0%</span>
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                </section>
+            </div>
+        </div>
+    </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

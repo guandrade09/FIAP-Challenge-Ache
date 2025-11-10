@@ -1,0 +1,17 @@
+{% block conteudo %}
+<!-- Sidebar lateral -->
+ <link href="{{ url_for('static', filename='estilos/navegacaoSideBar.css') }}" rel="stylesheet">
+        <aside class="sidebar">
+            {% include "/partials/_alertaBox.html" %}
+            <img class="logo" src="../../static/imagens/icones/codexisGPT.png">
+            <nav class="sidebar-links">
+                <a href="/">Upload</a>
+                <a href="dados">Dados</a>
+                <!-- <a href="#">Sobre o Grupo</a> -->
+                <!-- <a href="teste">TESTES</a> -->
+                <a href="{{ url_for('modelo', filename='Modelo.xlsx') }}">Baixar planilha modelo</a>
+                {% include "/partials/_logout.html" %}
+                
+            </nav>
+        </aside>
+{% endblock %}

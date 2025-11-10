@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    background-color: #f4f5f7;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f4f5f7;
+    overflow-x: hidden; /* Importante para esconder qualquer vazamento */
+}
+
+.left-panel {
+    flex-basis: 45%;
+    padding: 40px;
+    color: #fff;
+    position: relative; 
+    
+    background: url('../imagens/achebackground.jpg') no-repeat right center/cover;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 400px;
+
+    z-index: 1;
+}
+
+.imagem_ache_login {
+    width: 9.3em;  
+    height: auto; 
+    position: absolute; 
+    top: 40px;    
+    left: 40px;   
+    z-index: 2;
+}
+
+.right-panel {
+    /* AQUI ESTÁ A MUDANÇA:
+       O painel tem 55% da largura, MAIS os 20px que ele vai
+       se mover para a esquerda.
+    */
+    flex-basis: calc(55% + 20px);
+    
+    padding: 40px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-y: auto;
+    min-width: 530px;
+
+    background-color: #f4f5f7;
+    
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    z-index: 2;
+
+    margin-left: -20px; /* Puxa 20px para a esquerda para sobrepor */
+}
+
+.login-form {
+    width: 100%;
+    max-width: 450px; 
+
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); 
+}
+
+.login-form h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    border: none;
+    background: transparent;
+
+    border-bottom: 1px solid #ccc;
+    padding: 12px 0; 
+    
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-bottom: 2px solid #E30074; 
+}
+
+.input-group input::placeholder {
+    color: #888;
+    font-weight: 400;
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.remember-forgot label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.remember-forgot input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.remember-forgot a {
+    color: #E30074; 
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    
+    background-color: #E30074; 
+    
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #c90066;
+}
+
+.bottom-link {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.bottom-link a {
+    color: #E30074;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bottom-link a:hover {
+    text-decoration: underline;
+}
